@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Haider's Eternal Love 💖</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #ff99cc, #ff66b3);
+            font-family: 'Arial Rounded MT Bold', sans-serif;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 2.8em;
+            text-shadow: 2px 2px 4px rgba(204, 0, 102, 0.5);
+            animation: heartbeat 1.5s infinite;
+            padding: 20px;
+            margin: 0 20px;
+        }
+
+        .buttons {
+            margin-top: 50px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            padding: 20px 50px;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.5em;
+            cursor: pointer;
+            transition: all 0.4s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            min-width: 200px;
+        }
+
+        #yes {
+            background: #00cc66;
+            color: white;
+            transform: rotate(-2deg);
+            border: 3px solid #00994d;
+        }
+
+        #yes:hover {
+            transform: rotate(2deg) scale(1.1);
+            background: #00ff77;
+        }
+
+        #no {
+            background: #ff6666;
+            color: white;
+            transform: rotate(2deg);
+            cursor: not-allowed;
+            position: relative;
+        }
+
+        #no:hover::after {
+            content: "This button is just for decoration 😉";
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            color: #ff6666;
+            font-size: 0.8em;
+            white-space: nowrap;
+        }
+
+        .message {
+            display: none;
+            color: #ffffff;
+            font-size: 2em;
+            margin-top: 30px;
+            animation: textGlow 2s infinite;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .floating-hearts span {
+            position: absolute;
+            animation: float 6s infinite linear;
+            opacity: 0;
+            user-select: none;
+            font-size: 28px;
+        }
+
+        @keyframes float {
+            from { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            to { transform: translateY(-20vh) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 10px #ffffff; }
+            50% { text-shadow: 0 0 20px #ff66b3; }
+            100% { text-shadow: 0 0 10px #ffffff; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌸 My Beloved Toto, Will You Be My Valentine? 🌸</h1>
+        
+        <div class="buttons">
+            <button id="yes" onclick="showLove()">YES! 🌹</button>
+            <button id="no" onmouseover="moveButton()" onclick="showMessage()">NO ❤️</button>
+        </div>
+
+        <div id="successMessage" class="message"></div>
+    </div>
+
+    <script>
+        function showMessage() {
+            const msg = document.getElementById('successMessage');
+            msg.textContent = "Our love only has 'YES' in its dictionary! 💖";
+            msg.style.display = 'block';
+            setTimeout(() => msg.style.display = 'none', 3000);
+        }
+
+        function moveButton() {
+            const noBtn = document.getElementById('no');
+            const maxMove = 30;
+            noBtn.style.transform = `translate(
+                ${Math.random() * maxMove - maxMove/2}px, 
+                ${Math.random() * maxMove - maxMove/2}px
+            ) rotate(${Math.random() * 10 - 5}deg)`;
+            noBtn.style.transition = 'all 0.3s';
+        }
+
+        function showLove() {
+            const msg = document.getElementById('successMessage');
+            msg.innerHTML = "You've made my heart blossom! 🌸<br>Thank you for saying YES! 💍<br>I promise to cherish you forever 🌙💖";
+            msg.style.display = 'block';
+            
+            // Create floating hearts
+            for(let i=0; i<50; i++) {
+                createHeart();
+            }
+        }
+
+        function createHeart() {
+            const heart = document.createElement('span');
+            heart.innerHTML = '💖';
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.fontSize = `${20 + Math.random()*30}px`;
+            heart.style.animation = `float ${3 + Math.random()*3}s linear`;
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 6000);
+        }
+
+        // Continuous hearts animation
+        setInterval(createHeart, 300);
+    </script>
+</body>
+</html>
